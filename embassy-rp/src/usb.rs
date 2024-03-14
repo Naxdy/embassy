@@ -414,11 +414,12 @@ impl<'d, T: Instance> driver::Bus for Bus<'d, T> {
     }
 
     fn endpoint_set_stalled(&mut self, _ep_addr: EndpointAddress, _stalled: bool) {
-        todo!();
+        warn!("Call to unsupported function 'endpoint_set_stalled'");
     }
 
     fn endpoint_is_stalled(&mut self, _ep_addr: EndpointAddress) -> bool {
-        todo!();
+        warn!("Call to unsupported function 'endpoint_is_stalled'");
+        return false;
     }
 
     fn endpoint_set_enabled(&mut self, ep_addr: EndpointAddress, enabled: bool) {
