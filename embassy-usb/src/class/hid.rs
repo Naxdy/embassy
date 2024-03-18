@@ -46,8 +46,11 @@ pub struct Config<'d> {
     /// high performance uses, and a value of 255 is good for best-effort usecases.
     pub poll_ms: u8,
 
-    /// Max packet size for both the IN and OUT endpoints.
-    pub max_packet_size: u16,
+    /// Max packet size for the IN endpoint
+    pub max_packet_size_in: u16,
+
+    /// Max packet size for the OUT endpoint
+    pub max_packet_size_out: u16,
 }
 
 /// Report ID
@@ -133,9 +136,9 @@ fn build<'d, D: Driver<'d>>(
         ],
     );
 
-    let ep_in = alt.endpoint_interrupt_in(config.max_packet_size, config.poll_ms);
+    let ep_in = alt.endpoint_interrupt_in(config.max_packet_size_in, config.poll_ms);
     let ep_out = if with_out_endpoint {
-        Some(alt.endpoint_interrupt_out(config.max_packet_size, config.poll_ms))
+        Some(alt.endpoint_interrupt_out(config.max_packet_size_out, config.poll_ms))
     } else {
         None
     };
